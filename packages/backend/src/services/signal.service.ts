@@ -17,11 +17,11 @@ export class SignalService {
             let side: 'bid'| 'ask' | null = null;
             const amount = "0.01";
 
-            if(elfaAlpha.isBullish && (signals.solanaWhale || signals.ethWhale)){
+            if(elfaAlpha?.isBullish && (signals.solanaWhale || signals.ethWhale)){
                 console.log(`SIGNAL BID: Elfa (${elfaAlpha.confidence}) + Whale detected.`);
                 side = 'bid';
-            }else if(elfaAlpha.confidence < 0.3){
-                console.log(`SIGNAL ASK: Sentiment Elfa extremly low (${elfaAlpha.confidence}).`);
+            }else if(elfaAlpha?.confidence < 0.3){
+                console.log(`SIGNAL ASK: Sentiment Elfa extremly low (${elfaAlpha?.confidence}).`);
                 side = 'ask';
             }
 
