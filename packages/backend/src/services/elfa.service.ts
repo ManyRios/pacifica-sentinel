@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export class ElfaService {
   private readonly apiKey = process.env.ELFA_API_KEY!;
-  private readonly baseUrl = 'https://api.elfa.ai/v2'
+  private readonly baseUrl = 'https://api.elfa.ai/v2';
+
 
   async healthCheck() {
     try {
@@ -35,6 +36,7 @@ export class ElfaService {
   }
 
   async getTokenIntelligence(symbol: string) {
+    let elfaErrorLogged = false;
     try {
       const res = await axios.get(`${this.baseUrl}/data/top-mentions`, {
         params: { ticker: symbol },
@@ -58,6 +60,10 @@ export class ElfaService {
       console.error(`Error consulting Elfa for ${symbol}:`, error);
       //IF THE LIMIT FOR ELFA API CALL EXCEEDS WE RETURN A MOCK
       if (error.response?.status === 429) {
+        if (!elfaErrorLogged) {
+          console.warn(`Elfa Limit reached. Silence mode activated.`);
+          elfaErrorLogged = true; // Solo loguea la primera vez
+        }
         console.warn(`ElfaService Limit exceeded for ${symbol}. Returning fallback data.`);
         return {
           isBullish: true,
