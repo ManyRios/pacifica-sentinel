@@ -18,9 +18,6 @@ export const PriceCharts = ({ currentPrice }: { currentPrice: number }) => {
         }
     }, [currentPrice]);
 
-    const latestPrice = data[data.length - 1]?.price
-    const previousPrice = data[data.length - 2]?.price
-
     const formatYAxis = (val: number) => `$${(val / 1000).toFixed(1)}k`
 
     return (
