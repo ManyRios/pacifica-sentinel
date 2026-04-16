@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build --workspace=@sentinel/frontend",
+  "outputDirectory": "packages/frontend/dist",
+  "installCommand": "npm install"
+}

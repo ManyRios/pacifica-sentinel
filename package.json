@@ -1,0 +1,13 @@
+{
+  "name": "pacifica-sentinel-monorepo",
+  "private": true,
+   "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev:backend": "npm run dev -w @sentinel/backend",
+    "dev:frontend": "npm run dev -w @sentinel/frontend",
+    "build:frontend": "npm run build -w @sentinel/frontend"
+  }
+}
