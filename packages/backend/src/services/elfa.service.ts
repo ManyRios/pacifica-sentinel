@@ -7,10 +7,10 @@ export class ElfaService {
   async healthCheck() {
     try {
       const res = await axios.get(`${this.baseUrl}/ping`, {
-        headers: { 
+        headers: {
           'Accept': 'application/json',
           'x-elfa-api-key': this.apiKey
-         }
+        }
       });
       return res.data;
     } catch (error) {
@@ -19,13 +19,13 @@ export class ElfaService {
     }
   }
 
-  async getApiStatus(){
+  async getApiStatus() {
     try {
       const res = await axios.get(`${this.baseUrl}/key-status`, {
-        headers: { 
+        headers: {
           'Accept': 'application/json',
           'x-elfa-api-key': this.apiKey
-         }
+        }
       });
       return res.data;
     } catch (error) {
@@ -38,14 +38,14 @@ export class ElfaService {
     try {
       const res = await axios.get(`${this.baseUrl}/data/top-mentions`, {
         params: { ticker: symbol },
-        headers: { 
+        headers: {
           'x-elfa-api-key': this.apiKey,
           'accept': 'application/json'
         }
       });
 
       const data = res.data?.data?.[0] || res.data?.[0];
-      
+
       const smartMentions = data?.smart_mentions_count || 0;
       const sentiment = data?.sentiment_score || 0.5;
 
@@ -54,19 +54,18 @@ export class ElfaService {
         confidence: sentiment,
         volume: smartMentions
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Error consulting Elfa for ${symbol}:`, error);
-      //IF THE LIMIT FOR ELFA API CALL EXCEEDS
+      //IF THE LIMIT FOR ELFA API CALL EXCEEDS WE RETURN A MOCK
       if (error.response?.status === 429) {
-        console.warn(`[ElfaService] Limit exceeded for ${symbol}. Returning fallback data.`);
-        return { 
-          isBullish: true, 
-          confidence: 0.72, 
+        console.warn(`ElfaService Limit exceeded for ${symbol}. Returning fallback data.`);
+        return {
+          isBullish: true,
+          confidence: 0.72,
           volume: 15,
           isFallback: true
         };
-    
-      return { isBullish: false, confidence: 0.5, volume: 0 };
-    }
-  }
-}
+      };
+    };
+  };
+};
