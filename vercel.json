@@ -1,5 +1,15 @@
 {
-  "buildCommand": "npm run build -w @sentinel/frontend",
-  "outputDirectory": "packages/frontend/dist",
-  "installCommand": "npm install"
+  "builds": [
+    {
+      "src": "packages/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "packages/frontend/dist" }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "packages/frontend/dist/index.html"
+    }
+  ]
 }
