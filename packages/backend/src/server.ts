@@ -20,8 +20,9 @@ const CLIENT = process.env.HOST!;
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT || '*', // Aquí va la URL de tu Vercel
-  methods: ['GET', 'POST'],
+app.use(cors({ 
+  origin: CLIENT,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true}));
 app.use(express.json());
 
