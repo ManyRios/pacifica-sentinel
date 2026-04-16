@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { initialDataChart } from '../utils/utils';
-import { BiTrendingUp, BiTrendingDown } from 'react-icons/bi';
-import { PricePoint } from '../types'
+import { initialDataChart } from '../utils/utils'
 
 export const PriceCharts = ({ currentPrice }: { currentPrice: number }) => {
     const [data, setData] = useState<any[]>(initialDataChart)
@@ -22,7 +20,6 @@ export const PriceCharts = ({ currentPrice }: { currentPrice: number }) => {
 
     const latestPrice = data[data.length - 1]?.price
     const previousPrice = data[data.length - 2]?.price
-    const isUp = latestPrice >= previousPrice
 
     const formatYAxis = (val: number) => `$${(val / 1000).toFixed(1)}k`
 
