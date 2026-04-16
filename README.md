@@ -39,3 +39,38 @@ Due to inconsistencies in the accountSubscribe methods of several Solana RPC nod
 
 ### Single Source of Truth (SSoT)
 I designed the backend to serve as the sole source of truth. Vault addresses and detection thresholds are configured server-side and transmitted dynamically to the frontend, simplifying scalability and reducing manual configuration errors.
+
+## Setup & Installation
+
+Follow these steps to clone the repository and configure the environment for local development.
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/ManyRios/pacifica-sentinel.git](https://github.com/ManyRios/pacifica-sentinel.git)
+cd pacifica-sentinel
+```
+
+### 2. Install Dependencies
+
+I used a monorepo structure, so you can install all dependencies for both frontend and backend from the root:
+
+```bash
+npm install:all
+# or if you prefer pnpm
+pnpm install
+```
+### 3. Environment Configuration
+I have included a .env.example file. You need to create a .env file in the root (or inside each package if preferred) with the following keys:
+
+### 4. Running the Project
+```bash
+npm run dev:backend && npm run dev:frontend
+```
+
+### 3. Copy your url in the corresponding .env 
+
+Copy the url in the corresponding .env in the backend for cors and the frontend to fetch from the API
+
+
+
+
