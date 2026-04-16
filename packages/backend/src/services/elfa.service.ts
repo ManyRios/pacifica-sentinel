@@ -56,6 +56,16 @@ export class ElfaService {
       };
     } catch (error) {
       console.error(`Error consulting Elfa for ${symbol}:`, error);
+      //IF THE LIMIT FOR ELFA API CALL EXCEEDS
+      if (error.response?.status === 429) {
+        console.warn(`[ElfaService] Limit exceeded for ${symbol}. Returning fallback data.`);
+        return { 
+          isBullish: true, 
+          confidence: 0.72, 
+          volume: 15,
+          isFallback: true
+        };
+    
       return { isBullish: false, confidence: 0.5, volume: 0 };
     }
   }
